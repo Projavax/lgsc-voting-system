@@ -69,37 +69,40 @@
 
   <script>
     const imageMap = {
-      "Team Mubarak": "images/mubarakandshawn.jpeg",
-      "Team Edward": "images/hazelandedward.jpeg",
-      "Amina - Secretary": "images/amina.jpeg",
+      "mubarakandshawn": "images/mubarakandshawn.jpeg",
+      "hazelandedward": "images/hazelandedward.jpeg",
+      "amina": "images/amina.jpeg",
     };
   
     fetch("https://script.google.com/macros/s/AKfycby76dKIr1JASPXYXeVChYxe9AV3ss-Y2Cs4DFOYIk8_tnhu-ZXVdt4FxSB7G6KcaNV7/exec")
-      .then(res => res.json())
-      .then(data => {
-        const grouped = {};
-  
-        data.forEach(item => {
-          if (!grouped[item.Section]) grouped[item.Section] = [];
-          grouped[item.Section].push(item);
-        });
-  
-        const container = document.getElementById("results");
-  
-        for (const section in grouped) {
-          const sectionDiv = document.createElement("div");
-          sectionDiv.className = "section";
-          sectionDiv.innerHTML = `<h2>${section}</h2>`;
-  
+    .then(res => res.json())
+    .then(data => {
+      const grouped = {};
+
+      data.forEach(item => {
+        if (!grouped[item.Section]) grouped[item.Section] = [];
+        grouped[item.Section].push(item);
+      });
+
+      const container = document.getElementById("results");
+
+      for (const section in grouped) {
+        const isHeadToHead = section.includes("/");
+
+        const sectionDiv = document.createElement("div");
+        sectionDiv.className = "section";
+        sectionDiv.innerHTML = `<h2>${section}</h2>`;
+
+        if (isHeadToHead) {
+          // Two candidates (Head-to-Head)
           grouped[section].forEach(candidate => {
             const percent = parseFloat(candidate.Percentage);
             const isGreen = percent >= 50;
-  
+
             const candidateDiv = document.createElement("div");
             candidateDiv.className = "candidate";
-  
             const imgSrc = imageMap[candidate.Candidate] || "images/error.jpg";
-  
+
             candidateDiv.innerHTML = `
               <img src="${imgSrc}" alt="${candidate.Candidate}" style="max-width:100px; border-radius:50%; margin-bottom:10px;" />
               <h3>${candidate.Candidate}</h3>
@@ -107,17 +110,41 @@
                 ${percent}% (${candidate.Votes} votes)
               </div>
             `;
-  
+
             sectionDiv.appendChild(candidateDiv);
           });
-  
-          container.appendChild(sectionDiv);
+
+        } else {
+          const yesData = grouped[section].find(c => c.Candidate.toLowerCase() === "yes");
+
+          if (yesData) {
+            const percent = parseFloat(yesData.Percentage);
+            const isGreen = percent >= 50;
+
+            const candidateDiv = document.createElement("div");
+            candidateDiv.className = "candidate";
+
+            const imgSrc = imageMap[section] || "images/error.jpg";
+
+            candidateDiv.innerHTML = `
+              <img src="${imgSrc}" alt="${section}" style="max-width:100px; border-radius:50%; margin-bottom:10px;" />
+              <h3>${section}</h3>
+              <div class="percentage ${isGreen ? "green" : "red"}">
+                ${percent}% Yes
+              </div>
+            `;
+
+            sectionDiv.appendChild(candidateDiv);
+          }
         }
-      })
-      .catch(err => {
-        console.error("Error fetching votes:", err);
-        document.getElementById("results").innerHTML = "<p>Failed to load results.</p>";
-      });
+
+        container.appendChild(sectionDiv);
+      }
+    })
+    .catch(err => {
+      console.error("Error fetching votes:", err);
+      document.getElementById("results").innerHTML = "<p>Failed to load results.</p>";
+    });
   </script>  
 </body>
 </html>

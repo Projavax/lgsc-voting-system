@@ -87,14 +87,13 @@
       const container = document.getElementById("results");
 
       for (const section in grouped) {
-        const isHeadToHead = section.includes("/");
+        const isHeadToHead = section.includes("Officer" || "President" || "Secretary");
 
         const sectionDiv = document.createElement("div");
         sectionDiv.className = "section";
         sectionDiv.innerHTML = `<h2>${section}</h2>`;
 
         if (isHeadToHead) {
-          // Two candidates (Head-to-Head)
           grouped[section].forEach(candidate => {
             const percent = parseFloat(candidate.Percentage);
             const isGreen = percent >= 50;

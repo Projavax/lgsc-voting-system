@@ -87,7 +87,7 @@
       const container = document.getElementById("results");
 
       for (const section in grouped) {
-        const isHeadToHead = section.includes("Officer" || "President" || "Secretary");
+        const isHeadToHead = section.includes("Officer") || section.includes("President") || section.includes("Secretary");
 
         const sectionDiv = document.createElement("div");
         sectionDiv.className = "section";

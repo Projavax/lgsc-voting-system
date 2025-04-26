@@ -13,10 +13,9 @@
       text-align: center;
     }
 
-    /* Spinner */
     #loader {
       border: 6px solid #f3f3f3;
-      border-top: 6px solid #3498db;
+      border-top: 6px solid #a00202;
       border-radius: 50%;
       width: 50px;
       height: 50px;
@@ -29,11 +28,10 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Blinking Dot */
     .live-dot {
-      height: 10px;
-      width: 10px;
-      background-color: red;
+      height: 23px;
+      width: 23px;
+      background-color: #a00202;
       border-radius: 50%;
       display: inline-block;
       margin-right: 8px;
@@ -94,9 +92,41 @@
         margin-bottom: 1rem;
       }
     }
+    #logo1 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    }
+
+    #logo1 img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    }
+
+    #logo2 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    }
+
+    #logo2 img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    }
+
   </style>
 </head>
 <body>
+  <div id="logo1">
+    <img src="images/logo1.png" alt="LGSC Logo"/>
+  </div>
+
+  <div id="logo2">
+    <img src="images/logo2.jpg" alt="Lancaster Logo"/>
+  </div>
+  
   <h1><span class="live-dot"></span>LGSC Election Live Results</h1>
   <p id="last-updated" style="font-size: 0.9rem; color: gray;"></p>
 

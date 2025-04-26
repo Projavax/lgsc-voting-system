@@ -68,58 +68,62 @@
   <div id="results"></div>
 
   <script>
+    // 1. Map candidate/team names to image URLs
     const imageMap = {
-      "Candidate A & B": "images/info.jpg",
-      "Candidate B & C": "images/info.jpg",
-      "Candidate A": "images/info.jpg",
-      "Candidate B": "images/info.jpg",
-      // Add other images here...
+      "Team Alpha": "images/team_alpha.jpg",
+      "Team Beta": "images/team_beta.jpg",
+      "John Doe": "images/john_doe.jpg",
+      "Jane Smith": "images/jane_smith.jpg",
+      "Alice": "images/alice.jpg",
+      "Bob": "images/bob.jpg",
+      // Add all your candidates here
     };
-
-    fetch("https://script.google.com/macros/s/AKfycbzZ5edgwfb5PYtEsQt1EVGGPdAreP4mPIRRM-G5slckdcpt22aKaC9LFlQp2U4Q9boT/exec")
+  
+    fetch("https://script.google.com/macros/s/AKfycby76dKIr1JASPXYXeVChYxe9AV3ss-Y2Cs4DFOYIk8_tnhu-ZXVdt4FxSB7G6KcaNV7/exec")
       .then(res => res.json())
       .then(data => {
-        const container = document.getElementById("results");
-        const seenSections = new Set();
-
+        const grouped = {};
+  
         data.forEach(item => {
-          const section = item.Section;
-          const name = item.Candidate;
-          const percent = parseFloat(item["Yes Percentage"]);
-          const yesVotes = item["Yes Votes"];
-          const noVotes = item["No Votes"];
-          const img = imageMap[name] || "images/info.jpg";
-
-          // If this is a new section, create container
-          if (!seenSections.has(section)) {
-            const sectionDiv = document.createElement("div");
-            sectionDiv.className = "section";
-            sectionDiv.innerHTML = `<h2>${section}</h2>`;
-            container.appendChild(sectionDiv);
-            seenSections.add(section);
-          }
-
-          const sectionDiv = container.querySelector(`.section:last-child`);
-          const candidateDiv = document.createElement("div");
-          candidateDiv.className = "candidate";
-
-          candidateDiv.innerHTML = `
-            <img src="${img}" alt="${name}">
-            <div class="candidate-info">
-              <h3>${name}</h3>
-              <div class="percentage ${percent >= 50 ? "green" : "red"}">
-                ${percent}% Yes (${yesVotes} Yes / ${noVotes} No)
-              </div>
-            </div>
-          `;
-
-          sectionDiv.appendChild(candidateDiv);
+          if (!grouped[item.Section]) grouped[item.Section] = [];
+          grouped[item.Section].push(item);
         });
+  
+        const container = document.getElementById("results");
+  
+        for (const section in grouped) {
+          const sectionDiv = document.createElement("div");
+          sectionDiv.className = "section";
+          sectionDiv.innerHTML = `<h2>${section}</h2>`;
+  
+          grouped[section].forEach(candidate => {
+            const percent = parseFloat(candidate.Percentage);
+            const isGreen = percent >= 50;
+  
+            const candidateDiv = document.createElement("div");
+            candidateDiv.className = "candidate";
+  
+            // Get image URL or fallback
+            const imgSrc = imageMap[candidate.Candidate] || "images/default.jpg";
+  
+            candidateDiv.innerHTML = `
+              <img src="${imgSrc}" alt="${candidate.Candidate}" style="max-width:100px; border-radius:50%; margin-bottom:10px;" />
+              <h3>${candidate.Candidate}</h3>
+              <div class="percentage ${isGreen ? "green" : "red"}">
+                ${percent}% (${candidate.Votes} votes)
+              </div>
+            `;
+  
+            sectionDiv.appendChild(candidateDiv);
+          });
+  
+          container.appendChild(sectionDiv);
+        }
       })
       .catch(err => {
-        console.error("Failed to fetch vote data:", err);
-        document.getElementById("results").innerHTML = "<p>Error loading results.</p>";
+        console.error("Error fetching votes:", err);
+        document.getElementById("results").innerHTML = "<p>Failed to load results.</p>";
       });
-  </script>
+  </script>  
 </body>
 </html>

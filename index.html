@@ -124,14 +124,14 @@
   </div>
 
   <div id="logo2">
-    <img src="images/logo2.jpg" alt="Lancaster Logo"/>
+    <img src="images/logo2skinned.png" alt="Lancaster Logo"/>
   </div>
   
   <h1><span class="live-dot"></span>LGSC Election Live Results</h1>
   <p id="last-updated" style="font-size: 0.9rem; color: gray;"></p>
 
-  <div id="loader"></div> <!-- Spinner here -->
-  <div id="results" style="display:none;"></div> <!-- Hidden initially -->
+  <div id="loader"></div>
+  <div id="results" style="display:none;"></div>
 
   <script>
     const imageMap = {
@@ -148,10 +148,9 @@
       document.getElementById("results").style.display = "block"; // Show results
 
       const lastUpdated = new Date().toLocaleString();
-      document.getElementById("last-updated").textContent = `Last Updated: ${lastUpdated}`;
+      document.getElementById("last-updated").textContent = `Last updated: ${lastUpdated}`;
         const grouped = {};
 
-        // Group data by Section
         data.forEach(entry => {
           if (!grouped[entry.Section]) {
             grouped[entry.Section] = [];

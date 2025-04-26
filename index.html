@@ -68,15 +68,10 @@
   <div id="results"></div>
 
   <script>
-    // 1. Map candidate/team names to image URLs
     const imageMap = {
-      "Team Alpha": "images/team_alpha.jpg",
-      "Team Beta": "images/team_beta.jpg",
-      "John Doe": "images/john_doe.jpg",
-      "Jane Smith": "images/jane_smith.jpg",
-      "Alice": "images/alice.jpg",
-      "Bob": "images/bob.jpg",
-      // Add all your candidates here
+      "Team Mubarak": "images/mubarakandshawn.jpeg",
+      "Team Edward": "images/hazelandedward.jpeg",
+      "Amina - Secretary": "images/amina.jpeg",
     };
   
     fetch("https://script.google.com/macros/s/AKfycby76dKIr1JASPXYXeVChYxe9AV3ss-Y2Cs4DFOYIk8_tnhu-ZXVdt4FxSB7G6KcaNV7/exec")
@@ -103,8 +98,7 @@
             const candidateDiv = document.createElement("div");
             candidateDiv.className = "candidate";
   
-            // Get image URL or fallback
-            const imgSrc = imageMap[candidate.Candidate] || "images/default.jpg";
+            const imgSrc = imageMap[candidate.Candidate] || "images/error.jpg";
   
             candidateDiv.innerHTML = `
               <img src="${imgSrc}" alt="${candidate.Candidate}" style="max-width:100px; border-radius:50%; margin-bottom:10px;" />

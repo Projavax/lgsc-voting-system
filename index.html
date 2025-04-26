@@ -74,7 +74,7 @@
       "amina": "images/amina.jpeg",
     };
   
-    fetch("https://script.google.com/macros/s/AKfycby76dKIr1JASPXYXeVChYxe9AV3ss-Y2Cs4DFOYIk8_tnhu-ZXVdt4FxSB7G6KcaNV7/exec")
+    fetch("https://script.google.com/macros/s/AKfycbwQI7958nGUCZ99FNNVSUK7BQb8Xzl9AZL5dK60QW1U1Uw80N6fXekcDPhJqdg-8gY/exec")
     .then(res => res.json())
     .then(data => {
       const grouped = {};
@@ -87,7 +87,8 @@
       const container = document.getElementById("results");
 
       for (const section in grouped) {
-        const isHeadToHead = section.includes("Officer") || section.includes("President") || section.includes("Secretary");
+        const headToHeadKeywords = ["Officer", "President", "Secretary"];
+        const isHeadToHead = headToHeadKeywords.some(keyword => section.includes(keyword));
 
         const sectionDiv = document.createElement("div");
         sectionDiv.className = "section";

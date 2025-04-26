@@ -138,12 +138,12 @@
       "mubarakandshawn": "images/mubarakandshawn.jpeg",
       "hazelandedward": "images/hazelandedward.jpeg",
       "amina": "images/amina.jpeg",
-      // add more if needed
     };
 
     fetch("https://script.google.com/macros/s/AKfycbyoppz_zNBMYd8Xf4czzoFEDwaw_QdZoyDbdisNtk4fU_u8Q5WxjVRk_19x7yc-WGl3/exec")
     .then(res => res.json())
     .then(data => {
+      console.log(data);
       document.getElementById("loader").style.display = "none";  // Hide spinner
       document.getElementById("results").style.display = "block"; // Show results
 
@@ -168,13 +168,15 @@
           sectionDiv.innerHTML = `<h2>${section}</h2>`;
 
           grouped[section].forEach(candidate => {
-            const percent = parseFloat(candidate.Percentage);
+            const rawPercent = parseFloat(candidate.Percentage);
+            const percent = isNaN(rawPercent) ? 0 : rawPercent;  // Default to 0 if bad data
             const isGreen = percent >= 50;
+
 
             const candidateDiv = document.createElement("div");
             candidateDiv.className = "candidate";
 
-            const imgKey = candidate.Candidate.toLowerCase().replace(/\s/g, ''); // Remove spaces
+            const imgKey = candidate.Candidate.toLowerCase().replace(/\s/g, '');
             const imgSrc = imageMap[imgKey] || "images/error.jpg";
 
             candidateDiv.innerHTML = `
@@ -182,7 +184,7 @@
               <div class="candidate-info">
                 <h3>${candidate.Candidate}</h3>
                 <div class="percentage ${isGreen ? "green" : "red"}">
-                  ${candidate.Percentage}% (${candidate.Votes} votes)
+                  ${percent.toFixed(1)}%
                 </div>
               </div>
             `;

@@ -165,6 +165,8 @@
   <script>
     const imageMap = {
       "mojereolamubarakkolawoleandankobiahshawnnanaasefuah_1": "images/mubarakandshawn.jpeg",
+      "mojereolamubarakkolawoleandankobiahshawnnanaasefuah_2": "images/mubarakandshawn.jpeg",
+      "edwardnanayawoforiandhazelmustapha_1": "images/hazelandedward.jpeg",
       "edwardnanayawoforiandhazelmustapha_2": "images/hazelandedward.jpeg",
       "aminaabassgiwa": "images/amina.jpeg",
       "layolaumuhozamurara": "images/layola.jpeg",
@@ -315,8 +317,8 @@
           barRight.style.backgroundColor = "#a00202";
           barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
 
-          barLeft.innerHTML = `${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)`;
-          barRight.innerHTML = `${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)`;
+          barLeft.innerHTML = `${cand1.Candidate.split(" ")[1]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)`;
+          barRight.innerHTML = `${cand2.Candidate.split(" ")[0]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -329,12 +331,33 @@
           sectionDiv.className = "section";
           sectionDiv.innerHTML = `<h2>${section}</h2>`;
 
-          candidates.forEach(cand => {
-            const percent = parseFloat(cand.Percentage) * 100 || 0;
-            const p = document.createElement("p");
-            p.innerHTML = `<strong>${cand.Candidate}</strong>: ${percent.toFixed(1)}%`;
-            sectionDiv.appendChild(p);
-          });
+          const cand = candidates[0];
+          const percent = parseFloat(cand.Percentage) * 100 || 0;
+
+          const barColor = percent > 50 ? "#0b850f" : "#a00202"; 
+
+          const barContainer = document.createElement("div");
+          barContainer.className = "bar-container";
+
+          const barLeft = document.createElement("div");
+          barLeft.className = "bar-left";
+          barLeft.style.width = percent + "%";
+          barLeft.style.backgroundColor = barColor;
+          barLeft.title = `${cand.Candidate}: ${percent.toFixed(1)}%`;
+
+          const barRight = document.createElement("div");
+          barRight.className = "bar-right";
+          barRight.style.width = (100 - percent) + "%";
+          barRight.style.backgroundColor = barColor === "#0b850f" ? "#a00202" : "#0b850f";
+          barRight.title = `${cand.Candidate}: ${percent.toFixed(1)}%`;
+
+          barLeft.innerHTML = `${cand.Candidate.split(" ")[0]} (${percent.toFixed(1)}%)`;
+          barRight.innerHTML = `No (${(100 - percent).toFixed(1)}%)`;
+
+          barContainer.appendChild(barLeft);
+          barContainer.appendChild(barRight);
+
+          sectionDiv.appendChild(barContainer);
 
           container.appendChild(sectionDiv);
         }

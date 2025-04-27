@@ -14,6 +14,10 @@
       position: relative;
     }
 
+    h1 {
+      margin-top: 60px;
+    }
+
     #loader {
       border: 6px solid #f3f3f3;
       border-top: 6px solid #a00202;
@@ -247,8 +251,8 @@
           barRight.style.backgroundColor = "#a00202";
           barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
 
-          barLeft.textContent = cand1.Candidate.split(" ")[0];
-          barRight.textContent = cand2.Candidate.split(" ")[0];
+          barLeft.innerHTML = `${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)`;
+          barRight.textContent = `${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);

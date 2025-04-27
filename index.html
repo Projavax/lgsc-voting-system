@@ -157,7 +157,7 @@
   </div>
   
   <h1><span class="live-dot"></span>LGSC Election Live Results</h1>
-  <p id="last-updated" style="font-size: 0.9rem; color: gray;"></p>
+  <p id="last-opened" style="font-size: 0.9rem; color: gray;"></p>
 
   <div id="loader"></div>
   <div id="results" style="display:none;"></div>
@@ -187,8 +187,8 @@
       document.getElementById("loader").style.display = "none";
       document.getElementById("results").style.display = "block";
 
-      const lastUpdated = new Date().toLocaleString();
-      document.getElementById("last-updated").textContent = `Last updated: ${lastUpdated}`;
+      const lastOpened = new Date().toLocaleString();
+      document.getElementById("last-opened").textContent = `Last opened: ${lastOpened}`;
 
       const grouped = {};
       data.forEach(entry => {
@@ -334,24 +334,22 @@
           const cand = candidates[0];
           const percent = parseFloat(cand.Percentage) * 100 || 0;
 
-          const barColor = percent > 50 ? "#0b850f" : "#a00202"; 
-
           const barContainer = document.createElement("div");
           barContainer.className = "bar-container";
 
           const barLeft = document.createElement("div");
           barLeft.className = "bar-left";
           barLeft.style.width = percent + "%";
-          barLeft.style.backgroundColor = barColor;
+          barLeft.style.backgroundColor = "#0b850f"; 
           barLeft.title = `${cand.Candidate}: ${percent.toFixed(1)}%`;
 
           const barRight = document.createElement("div");
           barRight.className = "bar-right";
           barRight.style.width = (100 - percent) + "%";
-          barRight.style.backgroundColor = barColor === "#0b850f" ? "#a00202" : "#0b850f";
-          barRight.title = `${cand.Candidate}: ${percent.toFixed(1)}%`;
+          barRight.style.backgroundColor = "#a00202"; 
+          barRight.title = `No: ${(100 - percent).toFixed(1)}%`;
 
-          barLeft.innerHTML = `${cand.Candidate.split(" ")[0]} (${percent.toFixed(1)}%)`;
+          barLeft.innerHTML = `Yes (${percent.toFixed(1)}%)`;
           barRight.innerHTML = `No (${(100 - percent).toFixed(1)}%)`;
 
           barContainer.appendChild(barLeft);

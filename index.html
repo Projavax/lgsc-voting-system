@@ -271,8 +271,8 @@
           barRight.style.backgroundColor = "#a00202";
           barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
 
-          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)<p1>` : `${percent1.toFixed(1)}%`;
-          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)<p1>` : `${percent2.toFixed(1)}%`;
+          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)<p1>` : `<p1>${percent1.toFixed(1)}%<p1>`;
+          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)<p1>` : `<p1>${percent2.toFixed(1)}%<p1>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -342,8 +342,8 @@
           barRight.style.backgroundColor = "#a00202";
           barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
 
-          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[1]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `${percent1.toFixed(1)}%`;
-          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `${percent2.toFixed(1)}%`;
+          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[1]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `<p1>${percent1.toFixed(1)}%<p1>`;
+          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `<p1>${percent2.toFixed(1)}%<p1>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -375,8 +375,8 @@
           barRight.style.backgroundColor = "#a00202"; 
           barRight.title = `No: ${(100 - percent).toFixed(1)}%`;
 
-          barLeft.innerHTML = percent > 40 ? `<p1>Yes (${percent.toFixed(1)}%)<p1>` : `${percent.toFixed(1)}%`;
-          barRight.innerHTML = (100 - percent) > 40 ? `<p1>No (${(100 - percent).toFixed(1)}%)<p1>` : `${100 - percent.toFixed(1)}%`;
+          barLeft.innerHTML = percent > 40 ? `<p1>Yes (${percent.toFixed(1)}%)<p1>` : `<p1>${percent.toFixed(1)}%<p1>`;
+          barRight.innerHTML = (100 - percent) > 40 ? `<p1>No (${(100 - percent).toFixed(1)}%)<p1>` : `<p1>${100 - percent.toFixed(1)}%<p1>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);

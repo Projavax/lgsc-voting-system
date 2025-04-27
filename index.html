@@ -157,7 +157,7 @@
   </div>
   
   <h1><span class="live-dot"></span>LGSC Election Live Results</h1>
-  <p id="last-opened" style="font-size: 0.9rem; color: gray;"></p>
+  <p id="disclaimer" style="font-size: 0.9rem; color: rgb(255, 0, 0);"></p>
 
   <div id="loader"></div>
   <div id="results" style="display:none;"></div>
@@ -181,14 +181,13 @@
       "stephaniesinthiasankara": "",
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbwVQ_P6y3daApcxBUfvwgjutZALyMniMcUTepuBNtKlJvkJe5PbcrB2QTz4ho2OiGjCJA/exec")
+    fetch("https://script.google.com/macros/s/AKfycbyxehGfbZpZbCGCPbVGWIbrMtHZ0nzo9VNyiLMbnbhg7yS2kS_J4ZoGGfN3SQ03-q4gOQ/exec")
     .then(res => res.json())
     .then(data => {
       document.getElementById("loader").style.display = "none";
       document.getElementById("results").style.display = "block";
 
-      const lastOpened = new Date().toLocaleString();
-      document.getElementById("last-opened").textContent = `Last opened: ${lastOpened}`;
+      document.getElementById("disclaimer").textContent = `DISCLAIMER: The colors do not signify teams.*`;
 
       const grouped = {};
       data.forEach(entry => {
@@ -202,10 +201,13 @@
 
       for (const section in grouped) {
         const candidates = grouped[section];
-        const isHeadToHead = section.toLowerCase().includes("communications") || section.toLowerCase().includes("secretary") || section.toLowerCase().includes("international") || section.toLowerCase().includes("clubs");
+        const headToHead = section.toLowerCase().includes("communications") 
+                          || section.toLowerCase().includes("secretary") 
+                          || section.toLowerCase().includes("international") 
+                          || section.toLowerCase().includes("clubs");
         const president = section.toLowerCase().includes("president");
 
-        if (isHeadToHead && candidates.length === 2) {
+        if (headToHead && candidates.length === 2) {
           const [cand1, cand2] = candidates;
 
           const totalVotes = parseFloat(cand1.Votes) + parseFloat(cand2.Votes);
@@ -330,6 +332,7 @@
           const sectionDiv = document.createElement("div");
           sectionDiv.className = "section";
           sectionDiv.innerHTML = `<h2>${section}</h2>`;
+          sectionDiv.innerHTML = `<h2>${section}</h2><p id="names", style="color:dark gray">${candidates[0].Description}</p>`;
 
           const cand = candidates[0];
           const percent = parseFloat(cand.Percentage) * 100 || 0;

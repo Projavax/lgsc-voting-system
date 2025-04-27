@@ -11,6 +11,7 @@
       background: #f8f9fa;
       color: #333;
       text-align: center;
+      position: relative;
     }
 
     #loader {
@@ -39,90 +40,122 @@
     }
 
     @keyframes blink {
-      0% { opacity: 1; }
+      0%, 100% { opacity: 1; }
       50% { opacity: 0; }
-      100% { opacity: 1; }
     }
 
     .section {
-      max-width: 700px;
+      max-width: 800px;
       margin: 2rem auto;
       background: #fff;
       padding: 1rem;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      text-align: left;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
     }
 
-    .candidate {
+    .bar-container {
+      position: relative;
+      height: 60px;
+      margin: 1rem 0;
+      background: #ddd;
+      border-radius: 30px;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      margin: 1rem 0;
-      flex-wrap: wrap;
     }
 
-    .candidate img {
-      width: 100px;
-      height: 100px;
+    .bar-left, .bar-right {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: white;
+      transition: width 1s ease;
+    }
+
+    .bar-left {
+      background-color: #0b850f;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      overflow: hidden;
+    }
+
+    .bar-right {
+      background-color: #a00202; 
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      overflow: hidden;
+    }
+
+    .candidate-name {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .bar-images {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.5rem 0;
+    }
+
+    .bar-images img {
+      width: 50px;
+      height: 50px;
       object-fit: cover;
       border-radius: 50%;
-      margin-right: 1rem;
     }
-
-    .candidate-info {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .percentage {
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    .green { color: green; }
-    .red { color: red; }
 
     @media (max-width: 600px) {
-      .candidate {
+      .bar-container {
         flex-direction: column;
-        align-items: flex-start;
+        height: auto;
       }
-
-      .candidate img {
-        margin-bottom: 1rem;
+      .bar-left, .bar-right {
+        width: 100% !important;
+        height: 30px;
+      }
+      .bar-images {
+        flex-direction: row;
       }
     }
+
     #logo1 {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
     }
-
     #logo1 img {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
+      height: 50px;
+      width: auto;
+      object-fit: contain;
     }
-
     #logo2 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
     }
-
     #logo2 img {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
+      height: 50px;
+      width: auto;
+      object-fit: contain;
     }
 
   </style>
 </head>
 <body>
+
   <div id="logo1">
     <img src="images/logo1.png" alt="LGSC Logo"/>
   </div>
-
   <div id="logo2">
     <img src="images/logo2skinned.png" alt="Lancaster Logo"/>
   </div>
@@ -158,56 +191,90 @@
 
       const lastUpdated = new Date().toLocaleString();
       document.getElementById("last-updated").textContent = `Last updated: ${lastUpdated}`;
-        const grouped = {};
 
-        data.forEach(entry => {
-          if (!grouped[entry.Section]) {
-            grouped[entry.Section] = [];
-          }
-          grouped[entry.Section].push(entry);
-        });
+      const grouped = {};
+      data.forEach(entry => {
+        if (!grouped[entry.Section]) {
+          grouped[entry.Section] = [];
+        }
+        grouped[entry.Section].push(entry);
+      });
 
-        const container = document.getElementById("results");
+      const container = document.getElementById("results");
 
-        for (const section in grouped) {
-          const isHeadToHead = section.toLowerCase().includes("president") || section.toLowerCase().includes("officer") || section.toLowerCase().includes("secretary");
+      for (const section in grouped) {
+        const candidates = grouped[section];
+        const isHeadToHead = section.toLowerCase().includes("president") || section.toLowerCase().includes("officer") || section.toLowerCase().includes("secretary");
+
+        if (isHeadToHead && candidates.length === 2) {
+          const [cand1, cand2] = candidates;
+
+          const totalVotes = parseFloat(cand1.Votes) + parseFloat(cand2.Votes);
+          const percent1 = totalVotes ? (cand1.Votes / totalVotes) * 100 : 0;
+          const percent2 = totalVotes ? (cand2.Votes / totalVotes) * 100 : 0;
 
           const sectionDiv = document.createElement("div");
           sectionDiv.className = "section";
           sectionDiv.innerHTML = `<h2>${section}</h2>`;
 
-          grouped[section].forEach(candidate => {
-            const rawPercent = parseFloat(candidate.Percentage) * 100;
-            const percent = isNaN(rawPercent) ? 0 : rawPercent;
-            const isGreen = percent >= 50;
+          const imagesDiv = document.createElement("div");
+          imagesDiv.className = "bar-images";
 
+          const img1 = document.createElement("img");
+          const img2 = document.createElement("img");
 
-            const candidateDiv = document.createElement("div");
-            candidateDiv.className = "candidate";
+          const imgKey1 = cand1.Candidate.toLowerCase().replace(/\s/g, '');
+          const imgKey2 = cand2.Candidate.toLowerCase().replace(/\s/g, '');
 
-            const imgKey = candidate.Candidate.toLowerCase().replace(/\s/g, '');
-            const imgSrc = imageMap[imgKey] || "images/error.jpg";
+          img1.src = imageMap[imgKey1] || "images/error.jpg";
+          img2.src = imageMap[imgKey2] || "images/error.jpg";
 
-            candidateDiv.innerHTML = `
-              <img src="${imgSrc}" alt="${candidate.Candidate}" />
-              <div class="candidate-info">
-                <h3>${candidate.Candidate}</h3>
-                <div class="percentage ${isGreen ? "green" : "red"}">
-                  ${percent.toFixed(1)}%
-                </div>
-              </div>
-            `;
+          imagesDiv.appendChild(img1);
+          imagesDiv.appendChild(img2);
 
-            sectionDiv.appendChild(candidateDiv);
+          const barContainer = document.createElement("div");
+          barContainer.className = "bar-container";
+
+          const barLeft = document.createElement("div");
+          barLeft.className = "bar-left";
+          barLeft.style.width = percent1 + "%";
+          barLeft.title = `${cand1.Candidate}: ${percent1.toFixed(1)}%`;
+
+          const barRight = document.createElement("div");
+          barRight.className = "bar-right";
+          barRight.style.width = percent2 + "%";
+          barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
+
+          barLeft.textContent = cand1.Candidate.split(" ")[0];
+          barRight.textContent = cand2.Candidate.split(" ")[0];
+
+          barContainer.appendChild(barLeft);
+          barContainer.appendChild(barRight);
+
+          sectionDiv.appendChild(imagesDiv);
+          sectionDiv.appendChild(barContainer);
+          container.appendChild(sectionDiv);
+
+        } else {
+          const sectionDiv = document.createElement("div");
+          sectionDiv.className = "section";
+          sectionDiv.innerHTML = `<h2>${section}</h2>`;
+
+          candidates.forEach(cand => {
+            const percent = parseFloat(cand.Percentage) * 100 || 0;
+            const p = document.createElement("p");
+            p.innerHTML = `<strong>${cand.Candidate}</strong>: ${percent.toFixed(1)}%`;
+            sectionDiv.appendChild(p);
           });
 
           container.appendChild(sectionDiv);
         }
-      })
-      .catch(err => {
-        console.error("Error fetching votes:", err);
-        document.getElementById("results").innerHTML = "<p>Failed to load results.</p>";
-      });
+      }
+    })
+    .catch(err => {
+      console.error("Error fetching votes:", err);
+      document.getElementById("results").innerHTML = "<p>Failed to load results.</p>";
+    });
   </script>  
 </body>
 </html>

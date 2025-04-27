@@ -111,11 +111,17 @@
       margin: 0.5rem 0;
     }
 
+    .bar-images .left-side, .bar-images .right-side {
+      display: flex;
+      align-items: center;
+    }
+
     .bar-images img {
       width: 50px;
       height: 50px;
       object-fit: cover;
       border-radius: 50%;
+      margin: 0 5px;
     }
 
     #logo1 {
@@ -158,8 +164,8 @@
 
   <script>
     const imageMap = {
-      "mojereolamubarakkolawoleandankobiahshawnnanaasefuah": "images/mubarakandshawn.jpeg",
-      "edwardnanyawoforiandhazelmustapha": "images/hazelandedward.jpeg",
+      "mojereolamubarakkolawoleandankobiahshawnnanaasefuah_1": "images/mubarakandshawn.jpeg",
+      "edwardnanayawoforiandhazelmustapha_2": "images/hazelandedward.jpeg",
       "aminaabassgiwa": "images/amina.jpeg",
       "layolaumuhozamurara": "images/layola.jpeg",
       "financeofficer": "images/livesey.jpeg",
@@ -194,7 +200,8 @@
 
       for (const section in grouped) {
         const candidates = grouped[section];
-        const isHeadToHead = section.toLowerCase().includes("president") || section.toLowerCase().includes("communications") || section.toLowerCase().includes("secretary") || section.toLowerCase().includes("international") || section.toLowerCase().includes("clubs");
+        const isHeadToHead = section.toLowerCase().includes("communications") || section.toLowerCase().includes("secretary") || section.toLowerCase().includes("international") || section.toLowerCase().includes("clubs");
+        const president = section.toLowerCase().includes("president");
 
         if (isHeadToHead && candidates.length === 2) {
           const [cand1, cand2] = candidates;
@@ -238,7 +245,78 @@
           barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
 
           barLeft.innerHTML = `${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)`;
-          barRight.textContent = `${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)`;
+          barRight.innerHTML = `${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)`;
+
+          barContainer.appendChild(barLeft);
+          barContainer.appendChild(barRight);
+
+          sectionDiv.appendChild(imagesDiv);
+          sectionDiv.appendChild(barContainer);
+          container.appendChild(sectionDiv);
+        } else if (president) {
+          const [cand1, cand2] = candidates;
+
+          const totalVotes = parseFloat(cand1.Votes) + parseFloat(cand2.Votes);
+          const percent1 = totalVotes ? (cand1.Votes / totalVotes) * 100 : 0;
+          const percent2 = totalVotes ? (cand2.Votes / totalVotes) * 100 : 0;
+
+          const sectionDiv = document.createElement("div");
+          sectionDiv.className = "section";
+          sectionDiv.innerHTML = `<h2>${section}</h2>`;
+
+          const imagesDiv = document.createElement("div");
+          imagesDiv.className = "bar-images";
+
+          const leftSideDiv = document.createElement("div");
+          leftSideDiv.className = "left-side";
+
+          const imgKey1 = cand1.Candidate.toLowerCase().replace(/\s/g, '') + "_1";
+          const imgKey2 = cand1.Candidate.toLowerCase().replace(/\s/g, '') + "_2";
+
+          const img1 = document.createElement("img");
+          const img2 = document.createElement("img");
+
+          img1.src = imageMap[imgKey1] || "images/error.jpg";
+          img2.src = imageMap[imgKey2] || "images/error.jpg";
+
+          leftSideDiv.appendChild(img1);
+          leftSideDiv.appendChild(img2);
+
+          const rightSideDiv = document.createElement("div");
+          rightSideDiv.className = "right-side";
+
+          const imgKey3 = cand2.Candidate.toLowerCase().replace(/\s/g, '') + "_1";
+          const imgKey4 = cand2.Candidate.toLowerCase().replace(/\s/g, '') + "_2";
+
+          const img3 = document.createElement("img");
+          const img4 = document.createElement("img");
+
+          img3.src = imageMap[imgKey3] || "images/error.jpg";
+          img4.src = imageMap[imgKey4] || "images/error.jpg";
+
+          rightSideDiv.appendChild(img3);
+          rightSideDiv.appendChild(img4);
+
+          imagesDiv.appendChild(leftSideDiv);
+          imagesDiv.appendChild(rightSideDiv);
+
+          const barContainer = document.createElement("div");
+          barContainer.className = "bar-container";
+
+          const barLeft = document.createElement("div");
+          barLeft.className = "bar-left";
+          barLeft.style.width = percent1 + "%";
+          barLeft.style.backgroundColor = "#0815C2";
+          barLeft.title = `${cand1.Candidate}: ${percent1.toFixed(1)}%`;
+
+          const barRight = document.createElement("div");
+          barRight.className = "bar-right";
+          barRight.style.width = percent2 + "%";
+          barRight.style.backgroundColor = "#a00202";
+          barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
+
+          barLeft.innerHTML = `${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)`;
+          barRight.innerHTML = `${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);

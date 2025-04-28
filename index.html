@@ -369,6 +369,20 @@
           const cand = candidates[0];
           const percent = parseFloat(cand.Percentage) * 100 || 0;
 
+          const photo = document.createElement("img");
+
+          const photoSrc = imageMap[section.toLowerCase().replace(/\s/g, '')] || "images/error.jpg";
+          photo.src = photoSrc;
+
+          photo.style.width = "100px";
+          photo.style.height = "100px";
+          photo.style.objectFit = "cover";
+          photo.style.borderRadius = "50%";
+          photo.style.display = "block";
+          photo.style.margin = "10px auto";
+
+          sectionDiv.appendChild(photo);
+
           const barContainer = document.createElement("div");
           barContainer.className = "bar-container";
 

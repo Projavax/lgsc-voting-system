@@ -203,8 +203,7 @@
       "joybandayalebbie": "images/joy.jpeg",
       "stephaniesinthiasankara": "",
     };
-
-    fetch("https://script.google.com/macros/s/AKfycbyxehGfbZpZbCGCPbVGWIbrMtHZ0nzo9VNyiLMbnbhg7yS2kS_J4ZoGGfN3SQ03-q4gOQ/exec")
+    fetch("https://script.google.com/macros/s/AKfycbylnNxZChpgZyJwyTaxRvh4rAxpGTzA0FMi5lulcPiRqjJjZeRe8edHGVz3ASRgqnWCpg/exec")
     .then(res => res.json())
     .then(data => {
       document.getElementById("loader").style.display = "none";
@@ -261,15 +260,20 @@
 
           const barLeft = document.createElement("div");
           barLeft.className = "bar-left";
-          barLeft.style.width = percent1 + "%";
+          barLeft.style.width = "0%";
           barLeft.style.backgroundColor = "#0815C2";
           barLeft.title = `${cand1.Candidate}: ${percent1.toFixed(1)}%`;
 
           const barRight = document.createElement("div");
           barRight.className = "bar-right";
-          barRight.style.width = percent2 + "%";
+          barRight.style.width = "100%";
           barRight.style.backgroundColor = "#a00202";
           barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
+
+          setTimeout(() => {
+            barLeft.style.width = percent1 + "%";
+            barRight.style.width = percent2 + "%";
+          }, Math.random() * 200 + 100);
 
           barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)<p1>` : `<p1>${percent1.toFixed(1)}%<p1`;
           barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)<p1>` : `<p1>${percent2.toFixed(1)}%<p1>`;
@@ -332,15 +336,20 @@
 
           const barLeft = document.createElement("div");
           barLeft.className = "bar-left";
-          barLeft.style.width = percent1 + "%";
+          barLeft.style.width = "0%";
           barLeft.style.backgroundColor = "#0815C2";
           barLeft.title = `${cand1.Candidate}: ${percent1.toFixed(1)}%`;
 
           const barRight = document.createElement("div");
           barRight.className = "bar-right";
-          barRight.style.width = percent2 + "%";
+          barRight.style.width = "100%";
           barRight.style.backgroundColor = "#a00202";
           barRight.title = `${cand2.Candidate}: ${percent2.toFixed(1)}%`;
+
+          setTimeout(() => {
+            barLeft.style.width = percent1 + "%";
+            barRight.style.width = percent2 + "%";
+          }, Math.random() * 200 + 100);
 
           barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[1]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `${percent1.toFixed(1)}%`;
           barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `${percent2.toFixed(1)}%`;
@@ -365,15 +374,20 @@
 
           const barLeft = document.createElement("div");
           barLeft.className = "bar-left";
-          barLeft.style.width = percent + "%";
+          barLeft.style.width = "0%";
           barLeft.style.backgroundColor = "#0b850f"; 
           barLeft.title = `${cand.Candidate}: ${percent.toFixed(1)}%`;
 
           const barRight = document.createElement("div");
           barRight.className = "bar-right";
-          barRight.style.width = (100 - percent) + "%";
+          barRight.style.width = "100%";
           barRight.style.backgroundColor = "#a00202"; 
           barRight.title = `No: ${(100 - percent).toFixed(1)}%`;
+
+          setTimeout(() => {
+            barLeft.style.width = percent + "%";
+            barRight.style.width = (100 - percent) + "%";
+          }, Math.random() * 200 + 100);
 
           barLeft.innerHTML = percent > 40 ? `<p1>Yes (${percent.toFixed(1)}%)<p1>` : `<p1>${percent.toFixed(1)}%<p1>`;
           barRight.innerHTML = (100 - percent) > 40 ? `<p1>No (${(100 - percent).toFixed(1)}%)<p1>` : `<p1>${100 - percent.toFixed(1)}.0%<p1>`;

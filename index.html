@@ -223,10 +223,7 @@
 
       for (const section in grouped) {
         const candidates = grouped[section];
-        const headToHead = section.toLowerCase().includes("communications") 
-                          || section.toLowerCase().includes("secretary") 
-                          || section.toLowerCase().includes("international") 
-                          || section.toLowerCase().includes("clubs");
+        const headToHead = section.toLowerCase().includes("secretary");
         const president = section.toLowerCase().includes("president");
 
         if (headToHead && candidates.length === 2) {

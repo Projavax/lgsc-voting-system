@@ -345,8 +345,8 @@
             barRight.style.width = percent2 + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[1]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `<p1>${percent1.toFixed(1)}%<p1>`;
-          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `<p1>${percent2.toFixed(1)}%<p1>`;
+          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `<p1>${percent1.toFixed(1)}%<p1>`;
+          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `<p1>${percent2.toFixed(1)}%<p1>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);

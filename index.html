@@ -6,7 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-  <title>LGSC Voting Live Results</title>
+  <title>LGSC Election Live Results</title>
   <style>
     h1 {
       margin-top: 5rem;
@@ -196,12 +196,9 @@
       "financeofficer": "images/livesey.jpeg",
       "welfareofficer": "images/kekeli.jpeg",
       "academicofficer": "images/daniella.jpeg",
-      "samueldavidosei": "images/samuel.jpeg",
-      "michaelayikuboateng": "",
-      "leilachaffra": "",
-      "faithconteh": "",
-      "joybandayalebbie": "images/joy.jpeg",
-      "stephaniesinthiasankara": "",
+      "clubs,societiesandsportsofficer": "images/samuel.jpeg",
+      "communicationsofficer": "",
+      "internationalstudentsofficer": "images/joy.jpeg",
     };
     fetch("https://script.google.com/macros/s/AKfycbylnNxZChpgZyJwyTaxRvh4rAxpGTzA0FMi5lulcPiRqjJjZeRe8edHGVz3ASRgqnWCpg/exec")
     .then(res => res.json())
@@ -209,7 +206,7 @@
       document.getElementById("loader").style.display = "none";
       document.getElementById("results").style.display = "block";
 
-      document.getElementById("disclaimer").textContent = `DISCLAIMER: The colours do not signify teams.*`;
+      document.getElementById("disclaimer").textContent = `DISCLAIMER: The colours do not signify teams for the Secretary position.*`;
 
       const grouped = {};
       data.forEach(entry => {
@@ -348,8 +345,8 @@
             barRight.style.width = percent2 + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `<p1>${percent1.toFixed(1)}%<p1>`;
-          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `<p1>${percent2.toFixed(1)}%<p1>`;
+          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[1]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `<p1>${percent1.toFixed(1)}%<p1>`;
+          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `<p1>${percent2.toFixed(1)}%<p1>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);

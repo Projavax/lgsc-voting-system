@@ -26,10 +26,17 @@
       font-size: 0.9rem;
     }
 
-    p1 {
+    .president {
       font-family:"Noticia Text", serif;
       font-weight: 200;
       font-size: 0.65rem;
+      font-weight: bold;
+    }
+
+    .others {
+      font-family:"Noticia Text", serif;
+      font-weight: 200;
+      font-size: 0.8rem;
       font-weight: bold;
     }
 
@@ -153,16 +160,19 @@
       top: 10px;
       left: 10px;
     }
+
     #logo1 img {
       height: 50px;
       width: auto;
       object-fit: contain;
     }
+
     #logo2 {
       position: absolute;
       top: 10px;
       right: 10px;
     }
+
     #logo2 img {
       height: 50px;
       width: auto;
@@ -208,6 +218,17 @@
       document.getElementById("results").style.display = "block";
 
       document.getElementById("disclaimer").textContent = `DISCLAIMER: The colours do not signify teams for the Secretary position.*`;
+
+      if (data.length === 0 || data.every(entry => parseFloat(entry.Votes) === 0)) {
+      document.getElementById("results").innerHTML = `
+      <div class="section">
+        <h2>Error - No Responses</h2>
+        <p>If you're viewing this page, it means no votes have been recorded with verification at this time.</p>
+        <img src="images/no-votes.jpg" alt="No votes yet" style="width: 150px; margin: 1rem auto;" />
+      </div>
+    `;
+    return;
+  }
 
       const grouped = {};
       data.forEach(entry => {
@@ -270,8 +291,8 @@
             barRight.style.width = percent2 + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)<p1>` : `<p1>${percent1.toFixed(1)}%<p1`;
-          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)<p1>` : `<p1>${percent2.toFixed(1)}%<p1>`;
+          barLeft.innerHTML = percent1 > 40 ? `<span class="others">${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)</span>` : `<span class="others">${percent1.toFixed(1)}%</span>`;
+          barRight.innerHTML = percent2 > 40 ? `<span class="others">${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)</span>` : `<span class="others">${percent2.toFixed(1)}%</span>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -346,8 +367,8 @@
             barRight.style.width = percent2 + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent1 > 40 ? `<p1>${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)<p1>`: `<p1>${percent1.toFixed(1)}%<p1>`;
-          barRight.innerHTML = percent2 > 40 ? `<p1>${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)<p1>`: `<p1>${percent2.toFixed(1)}%<p1>`;
+          barLeft.innerHTML = percent1 > 40 ? `<span class="president">${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)</span>`: `<span class="president">${percent1.toFixed(1)}%</span>`;
+          barRight.innerHTML = percent2 > 40 ? `<span class="president">${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)</span>`: `<span class="president">${percent2.toFixed(1)}%</span>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -398,8 +419,8 @@
             barRight.style.width = (100 - percent) + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent > 40 ? `<p1>Yes (${percent.toFixed(1)}%)<p1>` : `<p1>${percent.toFixed(1)}%<p1>`;
-          barRight.innerHTML = (100 - percent) > 40 ? `<p1>No (${(100 - percent).toFixed(1)}%)<p1>` : `<p1>${(100 - percent).toFixed(1)}%<p1>`;
+          barLeft.innerHTML = percent > 40 ? `<span class="others">Yes (${percent.toFixed(1)}%)</span>` : `<span class="others">${percent.toFixed(1)}%</span>`;
+          barRight.innerHTML = (100 - percent) > 40 ? `<span class="others">No (${(100 - percent).toFixed(1)}%)</span>` : `<span class="others">${(100 - percent).toFixed(1)}%</span>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -415,5 +436,11 @@
       document.getElementById("results").innerHTML = "<p>Failed to load results.</p>";
     });
   </script>  
+
+<footer style="text-align: center; margin-top: 2rem; padding: 1rem; font-size: 0.9rem; color: #888;">
+  For the 2025/26 term · Electoral Commission ·
+  <a style="text-align: left; font-size: 0.9rem; color: #888;" href="https://github.com/Projavax/lgsc-voting-system/blob/main/LICENSE" target="_blank">MIT License</a>
+</footer>
+
 </body>
 </html>

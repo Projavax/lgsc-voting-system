@@ -291,8 +291,8 @@
             barRight.style.width = percent2 + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent1 > 40 ? `<span class="others">${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)</span>` : `<span class="others">${percent1.toFixed(1)}%</span>`;
-          barRight.innerHTML = percent2 > 40 ? `<span class="others">${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)</span>` : `<span class="others">${percent2.toFixed(1)}%</span>`;
+          barLeft.innerHTML = percent1 > 40 ? `<span class="others">${cand1.Candidate.split(" ")[0]} (${percent1.toFixed(1)}%)</span>` : percent1 < 15 ? `` : `<span class="others">${percent1.toFixed(1)}%</span>`;
+          barRight.innerHTML = percent2 > 40 ? `<span class="others">${cand2.Candidate.split(" ")[0]} (${percent2.toFixed(1)}%)</span>` : percent2 < 15 ? `` : `<span class="others">${percent2.toFixed(1)}%</span>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -367,8 +367,8 @@
             barRight.style.width = percent2 + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent1 > 40 ? `<span class="president">${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)</span>`: `<span class="president">${percent1.toFixed(1)}%</span>`;
-          barRight.innerHTML = percent2 > 40 ? `<span class="president">${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)</span>`: `<span class="president">${percent2.toFixed(1)}%</span>`;
+          barLeft.innerHTML = percent1 > 40 ? `<span class="president">${cand1.Candidate.split(" ")[0]} & ${cand1.Candidate.split(" ")[5]} (${percent1.toFixed(1)}%)</span>`  : percent1 < 15 ? `` : `<span class="president">${percent1.toFixed(1)}%</span>`;
+          barRight.innerHTML = percent2 > 40 ? `<span class="president">${cand2.Candidate.split(" ")[1]} & ${cand2.Candidate.split(" ")[5]} (${percent2.toFixed(1)}%)</span>` : percent2 < 15 ? `` : `<span class="president">${percent2.toFixed(1)}%</span>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -419,8 +419,8 @@
             barRight.style.width = (100 - percent) + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent > 40 ? `<span class="others">Yes (${percent.toFixed(1)}%)</span>` : `<span class="others">${percent.toFixed(1)}%</span>`;
-          barRight.innerHTML = (100 - percent) > 40 ? `<span class="others">No (${(100 - percent).toFixed(1)}%)</span>` : `<span class="others">${(100 - percent).toFixed(1)}%</span>`;
+          barLeft.innerHTML = percent > 40 ? `<span class="others">Yes (${percent.toFixed(1)}%)</span>` : percent < 15 ? `` : `<span class="others">${percent.toFixed(1)}%</span>`;
+          barRight.innerHTML = (100 - percent) > 40 ? `<span class="others">No (${(100 - percent).toFixed(1)}%)</span>` : (100 - percent) < 15 ? `` : `<span class="others">${(100 - percent).toFixed(1)}%</span>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);
@@ -438,7 +438,7 @@
   </script>  
 
 <footer style="text-align: center; margin-top: 2rem; padding: 1rem; font-size: 0.9rem; color: #888;">
-  For the 2025/26 term · Electoral Commission ·
+  For the 2025/26 term • Electoral Commission •
   <a style="text-align: left; font-size: 0.9rem; color: #888;" href="https://github.com/Projavax/lgsc-voting-system/blob/main/LICENSE" target="_blank">MIT License</a>
 </footer>
 

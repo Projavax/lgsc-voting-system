@@ -13,7 +13,7 @@ Note: This website requires a Google Scripts deployment to properly run.
 2. The page will automatically fetch data from a linked Google Sheet via a Google Apps Scripts endpoint.
 3. Ensure that:
 - The Google App Scripts is published and publicly accessible (Deploy > Web App > Anyone).
-- The feth URL in your JavaScript file or <script> tag points to the correct endpoint.
+- The fetch URL in your JavaScript file or <script> tag points to the correct endpoint.
 4. Images and other assets are located in the images/ folder and are automatically loaded by index.html.
 
 

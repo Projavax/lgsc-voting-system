@@ -24,10 +24,12 @@ Note: This website requires a Google Scripts deployment to properly run.
 
 
 **Requirements**
-All images should be in .webp format to improve performance and reduce load time.
+1. All images should be in .webp format to improve performance and reduce load time.
 
 Entire codebase will be commented out soon.
+
 Can be used for future student body elections, preferably for the *Lancaster University Ghana student body*.
 
 **Author**
-- GitHub: @Projavax
+
+GitHub: @Projavax

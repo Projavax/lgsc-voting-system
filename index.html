@@ -43,7 +43,7 @@
     body {
       font-family: Arial, sans-serif;
       padding: 1rem;
-      background: #f8f9fa;
+      background: #f8f9fa; 
       color: #333;
       text-align: center;
       position: relative;
@@ -419,8 +419,8 @@
             barRight.style.width = (100 - percent) + "%";
           }, Math.random() * 200 + 100);
 
-          barLeft.innerHTML = percent > 40 ? `<span class="others">Yes (${percent.toFixed(1)}%)</span>` : percent < 15 ? `` : `<span class="others">${percent.toFixed(1)}%</span>`;
-          barRight.innerHTML = (100 - percent) > 40 ? `<span class="others">No (${(100 - percent).toFixed(1)}%)</span>` : (100 - percent) < 15 ? `` : `<span class="others">${(100 - percent).toFixed(1)}%</span>`;
+          barLeft.innerHTML = percent > 35 ? `<span class="others">Yes (${percent.toFixed(1)}%)</span>` : percent < 15 ? `` : `<span class="others">${percent.toFixed(1)}%</span>`;
+          barRight.innerHTML = (100 - percent) > 35 ? `<span class="others">No (${(100 - percent).toFixed(1)}%)</span>` : (100 - percent) < 15 ? `` : `<span class="others">${(100 - percent).toFixed(1)}%</span>`;
 
           barContainer.appendChild(barLeft);
           barContainer.appendChild(barRight);

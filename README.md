@@ -2,7 +2,7 @@
 This is a website that retrieves data from a database (Google Sheet), and displays all content in a user-friendly format. It was developed for the *LGSC 2025/26 elections*.
 
 **Installation Instructions**
-1. Clone the repository
+1. Clone the repository.
 2. Configure the data source (replace the placeholder URL with your own Google Apps Script endpoint), ensuring your Google Scripts deployment is published and accessible to "anyone".
 3. Run locally or host using a static site hosting service.
 
@@ -33,3 +33,5 @@ Can be used for future student body elections, preferably for the *Lancaster Uni
 **Author**
 
 GitHub: @Projavax
+
+*If you decide to use it, please give credits :).*

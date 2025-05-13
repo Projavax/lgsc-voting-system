@@ -34,4 +34,4 @@ Can be used for future student body elections, preferably for the *Lancaster Uni
 
 GitHub: @Projavax
 
-*If you decide to use it, please give credits :).*
+*If you decide to use it, please give credits :)*

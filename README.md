@@ -1,5 +1,5 @@
 # LGSC Election Results Website
-This is a website that retrieves data from a database (Google Sheet) tied to a google form, and displays all content in a user-friendly format. It was developed for the *LGSC 2025/26 elections*.
+This is a website that retrieves data from a database (Google Sheet), and displays all content in a user-friendly format. It was developed for the *LGSC 2025/26 elections*.
 
 **Installation Instructions**
 1. Clone the repository

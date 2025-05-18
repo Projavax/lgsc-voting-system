@@ -19,7 +19,7 @@ Note: This website requires a Google Scripts deployment to properly run.
 
 **Features**
 1. User-friendly display with mobile device compatibility. 
-2. Content (text) is fully editable via the linked sheet and/or google form without touching the code.
+2. Content (text) is fully editable via the linked sheet and/or Google form without touching the code.
 3. Minor edits are required in the codebase for changing images.
 
 

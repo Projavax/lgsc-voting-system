@@ -1,4 +1,4 @@
-# LGSC Election Results Website
+# Election Results Live Website
 This is a website that retrieves data from a database (Google Sheet), and displays all content in a user-friendly format. It was developed for the *LGSC 2025/26 elections*.
 
 **Installation Instructions**
